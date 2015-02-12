@@ -1,0 +1,21 @@
+@import 'variables';
+
+div {
+    color: transparentize($color, 0.2);
+}
+
+$anim-time: .2s;
+.example-enter {
+    opacity: 0.01;
+    transition: opacity $anim-time ease-in;
+    &.example-enter-active {
+        opacity: 1;
+    }
+}
+.example-leave {
+    opacity: 1;
+    transition: opacity $anim-time ease-in;
+    &.example-leave-active {
+        opacity: 0.01;
+    }
+}
