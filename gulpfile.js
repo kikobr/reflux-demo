@@ -18,7 +18,7 @@ gulp.task('lint', function(){
     return gulp.src('src/**/*.js')
         .pipe(react())
         .pipe(jshint())
-        .pipe(jshint.reporter('fail', { verbose: true }));
+        .pipe(jshint.reporter('default', { verbose: true }));
 });
 
 // Compile Sass
