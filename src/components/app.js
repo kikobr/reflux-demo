@@ -36,7 +36,7 @@ module.exports 	= React.createClass({
                 	<h1>Blog maroto</h1>
                 	<nav>
 	                    <ul>
-	                        <li><Link to="app">Dash</Link></li>
+	                        <li><Link to="posts">Posts</Link></li>
 	                        <li><Link to="inbox">Inbox</Link></li>
 	                    </ul>
                     </nav>

@@ -1,5 +1,5 @@
-var React 	= require('react'),
-	Post  	= require('./post');
+var React 		= require('react'),
+	PostPreview = require('./post-preview');
 
 module.exports = React.createClass({
 	getDefaultProps: function(){
@@ -20,7 +20,7 @@ module.exports = React.createClass({
 				<section className="post-list">
 					{
 						this.props.posts.map(function(post, i){
-							return <Post title={post.title} body={post.body} />;
+							return <PostPreview id={i} />;
 						})
 					}
 				</section>
