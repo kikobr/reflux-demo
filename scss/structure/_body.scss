@@ -1,0 +1,19 @@
+.app-body {
+	width: $content-width;
+	margin: 0 auto;
+	height: 100%; // flex
+	display: flex;
+}
+
+.app-content {
+	flex: 1 1 auto;
+	border-right: 1px solid #BCBCBC;
+	box-sizing: border-box;
+	padding: 15px;
+}
+
+.app-sidebar {
+	flex: 0 0 25%;
+	box-sizing: border-box;
+	padding-left: 15px;
+}

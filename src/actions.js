@@ -6,4 +6,6 @@ var Reflux = require('reflux');
     Actions.statusUpdate();
 */
 
-module.exports = Reflux.createAction({});
+module.exports = Reflux.createActions([
+	"statusUpdate"
+]);

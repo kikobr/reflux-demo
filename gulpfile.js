@@ -30,8 +30,8 @@ gulp.task('sass', function(){
 
 // Watch files for changes
 gulp.task('watch', function(){
-    gulp.watch('src/**/*.js', ['lint', 'browserify']);
-    gulp.watch('scss/*.scss', ['sass']);
+    gulp.watch(['src/**/*.js', 'src/**/*.jsx'], ['lint', 'browserify']);
+    gulp.watch('scss/*/**.scss', ['sass']);
 });
 
 
