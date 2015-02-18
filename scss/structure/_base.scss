@@ -9,6 +9,12 @@ html, body {
 	height: 100%; width: 100%;
 	display: flex;
 	flex-direction: column;
+
+	// BEM modified, _modifier_modifier-value -> --modifier_modifier-value
+	// &--active_ {
+	// 	&yes { color: green; }
+	// 	&no { color: red; }
+	// }
 }
 
 @import 'header';

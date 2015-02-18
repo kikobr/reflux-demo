@@ -11,7 +11,8 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     rename = require('gulp-rename'),
-    react = require('gulp-react');
+    react = require('gulp-react'),
+    cssmin = require('gulp-cssmin');
 
 // Lint task
 gulp.task('lint', function(){
@@ -25,7 +26,8 @@ gulp.task('lint', function(){
 gulp.task('sass', function(){
     return gulp.src('scss/*.scss')
         .pipe(sass())
-        .pipe(gulp.dest('css'));
+        .pipe(rename('main.min.css'))
+        .pipe(gulp.dest('dist'));
 });
 
 // Watch files for changes
@@ -60,11 +62,18 @@ function bundle() {
         .pipe(gulp.dest('./dist'));
 }
 
-gulp.task('build', function(){
+gulp.task('build-js', function(){
     return gulp.src('dist/bundle.min.js')
         .pipe(uglify())
         .pipe(gulp.dest('./dist'));
 });
 
+gulp.task('build-css', function(){
+    return gulp.src('dist/main.min.css')
+        .pipe(cssmin())
+        .pipe(gulp.dest('./dist'))
+});
+
 // Default
 gulp.task('default', ['lint', 'sass', 'browserify', 'watch']);
+gulp.task('build', ['build-js', 'build-css']);
