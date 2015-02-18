@@ -6,15 +6,15 @@ var React 		= require('react'),
 // Routes
 var App 		= require('./components/app'),
 	Inbox 		= require('./components/inbox'),
-	Posts  		= require('./components/post/posts'),
+	RouteHandler= require('./components/animated-route-handler'), // empty handler
 	PostList  	= require('./components/post/postlist'),
 	Post  		= require('./components/post/post');
 
 module.exports = (
 <Route name="app" path="/" handler={App}>
-    <Route name="posts" path="/posts" handler={Posts}>
-    	<Route name="post" path=":id" handler={Post} />
-    	<DefaultRoute handler={PostList} />
+    <Route name="posts" path="/posts" handler={RouteHandler}>
+    	<Route name="post" path=":id" handler={Post} addHandlerKey={false} />
+    	<DefaultRoute name="posts-list" handler={PostList} addHandlerKey={false} />
     </Route>
     <Route name="inbox" handler={Inbox} />
     <DefaultRoute handler={PostList} />

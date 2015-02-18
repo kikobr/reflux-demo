@@ -7,7 +7,7 @@ module.exports = React.createClass({
 			posts : [
 				{
 					title: 'post 1', body: 'texto do post 1',
-				}, {				
+				}, {
 					title: 'post 2', body: 'texto do post 2',
 				}
 			]

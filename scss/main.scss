@@ -1,6 +1,11 @@
+// Default variables
 @import 'variables';
+
+// Layout structure
 @import 'structure/base';
 
-div {
-    color: transparentize($color, 0.2);
-}
+// Toolkit
+@import 'functions/base';
+
+// React animations
+@import 'react-animations/base';

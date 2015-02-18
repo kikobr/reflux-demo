@@ -1,0 +1,33 @@
+// Should render like this
+// $anim-time: 1s;
+// .example-enter {
+//     opacity: 0.01;
+//     transition: opacity $anim-time ease-in;
+//     &.example-enter-active {
+//         opacity: 1;
+//     }
+// }
+// .example-leave {
+//     opacity: 1;
+//     transition: opacity $anim-time ease-in;
+//     &.example-leave-active {
+//         opacity: 0.01;
+//     }
+// }
+
+@mixin create-react-csstransition($name, $anim-time, $property, $from, $to, $easing:ease-in){
+    .#{$name}-enter {
+        #{$property}: $from;
+        transition: #{$property} $anim-time $easing;
+        &.#{$name}-enter-active {
+            #{$property}: $to;
+        }
+    }
+    .#{$name}-leave {
+        #{$property}: $to;
+        transition: #{$property} $anim-time $easing;
+        &.#{$name}-leave-active {
+            #{$property}: $from;
+        }
+    }
+}
