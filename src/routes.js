@@ -12,9 +12,9 @@ var App 		= require('./components/app'),
 
 module.exports = (
 <Route name="app" path="/" handler={App}>
-    <Route name="posts" path="/posts" handler={RouteHandler}>
-    	<Route name="post" path=":id" handler={Post} addHandlerKey={false} />
-    	<DefaultRoute name="posts-list" handler={PostList} addHandlerKey={false} />
+    <Route name="posts" path="/posts">
+    	<Route name="post" path=":id" handler={Post} />
+		<DefaultRoute name="posts-list" handler={PostList} />
     </Route>
     <Route name="inbox" handler={Inbox} />
     <DefaultRoute handler={PostList} />
