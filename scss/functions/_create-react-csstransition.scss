@@ -15,10 +15,10 @@
 //     }
 // }
 
-@mixin create-react-csstransition($name, $anim-time, $property, $from, $to, $easing:ease-in){
+@mixin create-react-csstransition($name, $anim-time, $property, $from, $to, $easing:ease-in, $delay:0){
     .#{$name}-enter {
         #{$property}: $from;
-        transition: #{$property} $anim-time $easing;
+        transition: #{$property} $anim-time $easing $delay;
         &.#{$name}-enter-active {
             #{$property}: $to;
         }

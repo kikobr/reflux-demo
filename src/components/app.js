@@ -4,7 +4,10 @@ var React 		= require('react'),
 	Link    	= Router.Link,
 	RouteHandler= Router.RouteHandler;
 
+	var TransitionGroup = require('react/lib/ReactCSSTransitionGroup');
+
 module.exports 	= React.createClass({
+	mixins: [ Router.State ],
     getInitialState: function(){
         return {
             body: ''
@@ -30,6 +33,7 @@ module.exports 	= React.createClass({
         // }.bind(this));
     },
     render: function(){
+		var name = this.getRoutes().reverse()[0].name;
         return (
             <div className="app">
                 <header className="app-header">
@@ -45,7 +49,9 @@ module.exports 	= React.createClass({
                 <div className="app-body">
                 	<section className="app-content">
                 		{/* outlet */}
-                		<RouteHandler/>
+						<TransitionGroup component="div" className="fullAnimationContainer" transitionName="fadein">
+							<RouteHandler key={name}/>
+						</TransitionGroup>
                 	</section>
                 	<section className="app-sidebar">
                 		aaaa

@@ -15,12 +15,12 @@ module.exports = React.createClass({
 	},
 	render: function(){
 		return (
-			<div>
+			<div className="postlist">
 				<span>Exibindo posts:</span>
 				<section className="post-list">
 					{
 						this.props.posts.map(function(post, i){
-							return <PostPreview id={i} />;
+							return <PostPreview id={i} key={i} />;
 						})
 					}
 				</section>
