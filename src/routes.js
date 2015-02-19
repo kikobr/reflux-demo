@@ -6,10 +6,11 @@ var React 		= require('react'),
 // Routes
 var App 		= require('./components/app'),
 	Inbox 		= require('./components/inbox'),
-	RouteHandler= require('./components/animated-route-handler'), // empty handler
 	PostList  	= require('./components/post/postlist'),
 	Post  		= require('./components/post/post'),
 	Login  		= require('./components/login');
+
+var ProtectedPage = require('./components/protected-page');
 
 module.exports = (
 <Route>
@@ -19,6 +20,7 @@ module.exports = (
 			<DefaultRoute name="posts-list" handler={PostList} />
 	    </Route>
 	    <Route name="inbox" handler={Inbox} />
+		<Route name="protected-page" handler={ProtectedPage} />
 	    <DefaultRoute handler={PostList} />
 	</Route>
 	<Route name="login" path="/admin" handler={Login} />

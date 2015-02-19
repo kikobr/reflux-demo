@@ -11,6 +11,7 @@ var React 			= require('react'),
 module.exports 	= React.createClass({
 	mixins: [
 		Router.State,
+		Router.Navigation,
 		Reflux.listenTo(LoginStore,"loginStatus")
 	],
     getInitialState: function(){
@@ -20,9 +21,14 @@ module.exports 	= React.createClass({
         };
     },
 	loginStatus: function(status){
-		this.setState({admin: status.user});
+		var admin = status.user.isLogged ? status.user : false;
+		this.setState({admin: admin});
 	},
-	logout: function(){ LogoutAction.trigger(); },
+	logout: function(){
+		LogoutAction.trigger();
+		// impedindo que continue numa pagina restrita
+		this.transitionTo('app');
+	},
     componentDidMount: function(){
         // qwest.get('https://community-wikipedia.p.mashape.com/api.php', {
         //     action: 'query',
@@ -52,6 +58,7 @@ module.exports 	= React.createClass({
 	                    <ul>
 	                        <li><Link to="posts">Posts</Link></li>
 	                        <li><Link to="inbox">Inbox</Link></li>
+							<li><Link to="protected-page">Protected Page</Link></li>
 	                    </ul>
                     </nav>
                 </header>
@@ -60,7 +67,7 @@ module.exports 	= React.createClass({
                 	<section className="app-content">
                 		{/* outlet */}
 						<TransitionGroup component="div" className="fullAnimationContainer" transitionName="fadein">
-							<RouteHandler key={name} admin={this.state.admin.isLogged ? this.state.admin : false} />
+							<RouteHandler key={name} admin={this.state.admin ? this.state.admin : false} />
 						</TransitionGroup>
                 	</section>
                 	<section className="app-sidebar">

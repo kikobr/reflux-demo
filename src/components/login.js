@@ -1,4 +1,6 @@
 var React         = require('react'),
+    Router        = require('react-router'),
+    Link          = Router.Link,
     Reflux        = require('reflux'),
     LoginStore    = require('../stores/login'),
     LoginAction   = require('../actions').login,
@@ -6,11 +8,17 @@ var React         = require('react'),
     TransitionGroup = require('react/lib/ReactCSSTransitionGroup');
 
 module.exports = React.createClass({
-    mixins: [Reflux.listenTo(LoginStore,"loginStatus")],
+    mixins: [Router.State, Reflux.listenTo(LoginStore,"loginStatus")],
     getInitialState: function(){
-        return LoginStore.auth;
+        return {
+            admin: LoginStore.auth.user.isLogged ? LoginStore.auth.user : false
+        };
     },
-    componentDidMount: function(){ this.setState({error: false}); },
+    componentDidMount: function(){
+        var error = false;
+        if(this.getQuery().error){ error = this.getQuery().error; }
+        this.setState({error: error});
+    },
     // --------------------------------------
     login: function(){
         var username = this.refs.username.getDOMNode().value,
@@ -20,15 +28,21 @@ module.exports = React.createClass({
         LoginAction.trigger({ username: username, password: password });
     },
     logout: function(){ LogoutAction.trigger(); },
-    loginStatus: function(auth){
-        this.setState(auth);
+    loginStatus: function(status){
+        var admin = status.user.isLogged ? status.user : false;
+        this.setState({
+            admin: admin,
+            error: status.error
+        });
     },
     // ---------------------------------------
     render: function(){
-        var output = this.state.user.isLogged ? (
+        var output = this.state.admin ? (
             <div>
-                <h1>You are logged in, {this.state.user.username}.</h1>
+                <h1>You are logged in, {this.state.admin.username}.</h1>
                 <button onClick={this.logout}>Logout</button>
+                <br/>
+                <Link to="posts">Posts</Link>
             </div>
         ) :
         (
