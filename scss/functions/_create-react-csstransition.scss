@@ -15,7 +15,7 @@
 //     }
 // }
 
-@mixin create-react-csstransition($name, $anim-time, $property, $from, $to, $easing:ease-in, $delay:0){
+@mixin create-react-csstransition($name, $anim-time, $property, $from, $to, $easing:ease-in, $delay:0ms){
     .#{$name}-enter {
         #{$property}: $from;
         transition: #{$property} $anim-time $easing $delay;
