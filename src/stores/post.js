@@ -11,6 +11,7 @@ module.exports = Reflux.createStore({
         // registrando actions
         this.listenTo(actions['new-post'], this.newPost);
         this.listenTo(actions['edit-post'], this.editPost);
+        this.listenTo(actions['delete-post'], this.deletePost);
 
         this.refreshPosts();
     },
@@ -42,17 +43,19 @@ module.exports = Reflux.createStore({
             createdAt: new Date(),
         }, function(res){
             posts.push(res);
-            console.log(posts);
             this.trigger();
         }.bind(this));
     },
     editPost: function(data){
         if(!LoginStore.isAuthenticated() || !data.title || !data.title || !data.body) return false;
-        LocalStorage.save({
-            key: data.id,
-            title: data.title,
-            body: data.body
-        }, function(res){
+        LocalStorage.save(data, function(res){
+            this.refreshPosts();
+            this.trigger();
+        }.bind(this));
+    },
+    deletePost: function(data){
+        if(!LoginStore.isAuthenticated() || !data.title || !data.title || !data.body) return false;
+        LocalStorage.remove(data, function(res){
             this.refreshPosts();
             this.trigger();
         }.bind(this));

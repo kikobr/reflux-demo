@@ -17,10 +17,12 @@ var ProtectedPage = require('./components/protected-page');
 module.exports = (
 <Route>
 	<Route name="app" path="/" handler={App}>
-	    <Route name="posts" path="/posts">
-	    	<Route name="post" path=":id" handler={Post} />
-			<Route name="edit-post" path=":id/edit" handler={EditPost} />
-			<Route name="new-post" path="/new" handler={NewPost} />
+	    <Route name="posts" path="posts">
+			<Route name="new-post" path="new" handler={NewPost} />
+	    	<Route name="post" path=":id">
+				<Route name="edit-post" path="edit" handler={EditPost} />
+				<DefaultRoute handler={Post} />
+			</Route>
 			<DefaultRoute name="posts-list" handler={PostList} />
 	    </Route>
 	    <Route name="inbox" handler={Inbox} />
