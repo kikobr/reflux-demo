@@ -11,10 +11,9 @@ module.exports = React.createClass({
 		};
 	},
 	render: function(){
-		var title = this.props.title + this.props.id;
 		return (
-			<Link to="post" params={this.props}>
-				<h1>{title}</h1>
+			<Link to="post" params={{id: this.props.id}}>
+				<h1>{this.props.title}</h1>
 				<p>{this.props.body}</p>
 			</Link>
 		);

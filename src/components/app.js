@@ -76,6 +76,8 @@ module.exports 	= React.createClass({
 								<span> Logged in as {this.state.admin.username}</span>
 								<br/>
 								<button onClick={this.logout}>Logout</button>
+								<hr/>
+								<Link to="new-post">Novo Post</Link>
 							</section>
 						) : ''}
                 	</section>

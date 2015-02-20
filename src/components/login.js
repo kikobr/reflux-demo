@@ -8,7 +8,10 @@ var React         = require('react'),
     TransitionGroup = require('react/lib/ReactCSSTransitionGroup');
 
 module.exports = React.createClass({
-    mixins: [Router.State, Reflux.listenTo(LoginStore,"loginStatus")],
+    mixins: [
+        Router.State,
+        Reflux.listenTo(LoginStore,"loginStatus")
+    ],
     getInitialState: function(){
         return {
             admin: LoginStore.auth.user.isLogged ? LoginStore.auth.user : false
@@ -30,10 +33,14 @@ module.exports = React.createClass({
     logout: function(){ LogoutAction.trigger(); },
     loginStatus: function(status){
         var admin = status.user.isLogged ? status.user : false;
-        this.setState({
-            admin: admin,
-            error: status.error
-        });
+        // this.setState({
+        //     admin: admin,
+        //     error: status.error
+        // });
+        if(admin && LoginStore.pendentTransition){
+            LoginStore.pendentTransition.retry();
+            LoginStore.pendentTransition = undefined;
+        }
     },
     // ---------------------------------------
     render: function(){

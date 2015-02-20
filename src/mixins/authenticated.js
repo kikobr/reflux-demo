@@ -7,7 +7,9 @@ module.exports = {
         willTransitionTo: function(transition, params, query){
             if(LoginStore.auth.user && LoginStore.auth.user.isLogged){}
             else {
-                transition.redirect('login', params, {error: 'Faça login antes'}); // this will require Router.Navigation mixin
+                // this will require Router.Navigation mixin
+                LoginStore.pendentTransition = transition;
+                transition.redirect('login', params, {error: 'Faça login antes'});
                 return;
             }
         }

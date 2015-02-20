@@ -1,6 +1,6 @@
 var Reflux = require('reflux'),
     actions = require('../actions'),
-    LocalStorage = require('../local-storage');
+    LocalStorage = require('../local-storage')('login');
 
 var STORAGE_KEY = 'loginInfo';
 
@@ -64,5 +64,8 @@ module.exports = Reflux.createStore({
             this.auth = res;
             this.trigger(res);
         }.bind(this));
+    },
+    isAuthenticated: function(){
+        return this.auth.user && this.auth.user.isLogged ? true : false;
     }
 });

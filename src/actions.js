@@ -10,4 +10,6 @@ module.exports = Reflux.createActions([
 	"statusUpdate",
 	"login",
 	"logout",
+	"new-post",
+	"edit-post"
 ]);

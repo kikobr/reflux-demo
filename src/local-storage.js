@@ -1,4 +1,6 @@
-module.exports = window.artemia.getStore({
-    type : 'local',
-    base : 'KikoBlog'
-});
+module.exports = function(base){
+    return window.artemia.getStore({
+        type : 'local',
+        base : base
+    });
+};

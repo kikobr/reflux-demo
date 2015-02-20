@@ -1,16 +1,11 @@
 var React 		= require('react'),
-	PostPreview = require('./post-preview');
+	PostPreview = require('./post-preview'),
+	PostStore = require('../../stores/post');
 
 module.exports = React.createClass({
-	getDefaultProps: function(){
+	getInitialState: function(){
 		return {
-			posts : [
-				{
-					title: 'post 1', body: 'texto do post 1',
-				}, {
-					title: 'post 2', body: 'texto do post 2',
-				}
-			]
+			posts: PostStore.getPosts()
 		};
 	},
 	render: function(){
@@ -19,9 +14,9 @@ module.exports = React.createClass({
 				<span>Exibindo posts:</span>
 				<section className="post-list">
 					{
-						this.props.posts.map(function(post, i){
-							return <PostPreview id={i} key={i} />;
-						})
+						this.state.posts.map(function(post, i){
+							return <PostPreview {...post} key={i} id={post.key} admin={this.props.admin} />;
+						}.bind(this))
 					}
 				</section>
 			</div>
